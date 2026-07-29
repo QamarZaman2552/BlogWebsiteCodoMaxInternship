@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Blog - Blog Management System</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <nav>
@@ -17,21 +18,21 @@
   </nav>
 
   <main>
-    <h1>Add New Blog</h1>
-    <form>
-      <div>
+    <h1 class="page-title">Add New Blog</h1>
+    <form class="blog-form">
+      <div class="form-group">
         <label for="title">Blog Title</label>
         <input type="text" id="title" name="title" required>
       </div>
-      <div>
+      <div class="form-group">
         <label for="author">Author</label>
         <input type="text" id="author" name="author" required>
       </div>
-      <div>
+      <div class="form-group">
         <label for="content">Content</label>
         <textarea id="content" name="content" rows="10" required></textarea>
       </div>
-      <button type="submit">Submit Blog</button>
+      <button type="submit" class="btn">Submit Blog</button>
     </form>
   </main>
 

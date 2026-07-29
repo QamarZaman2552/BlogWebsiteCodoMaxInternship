@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog Management System</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <nav>
@@ -17,23 +18,25 @@
   </nav>
 
   <main>
-    <section>
+    <section class="hero">
       <h1>Welcome to Blog Management System</h1>
       <p>Share your thoughts, ideas, and stories with the world.</p>
     </section>
 
     <section>
-      <h2>Recent Blogs</h2>
-      <article>
-        <h3>Sample Blog Post</h3>
-        <p>This is a sample blog post. More content coming soon!</p>
-        <p><small>Posted on July 28, 2026</small></p>
-      </article>
-      <article>
-        <h3>Getting Started with Blogging</h3>
-        <p>Blogging is a great way to express your ideas and connect with readers.</p>
-        <p><small>Posted on July 27, 2026</small></p>
-      </article>
+      <h2 class="section-title">Recent Blogs</h2>
+      <div class="blog-grid">
+        <article class="blog-card">
+          <h3>Sample Blog Post</h3>
+          <p>This is a sample blog post. More content coming soon!</p>
+          <small>Posted on July 28, 2026</small>
+        </article>
+        <article class="blog-card">
+          <h3>Getting Started with Blogging</h3>
+          <p>Blogging is a great way to express your ideas and connect with readers.</p>
+          <small>Posted on July 27, 2026</small>
+        </article>
+      </div>
     </section>
   </main>
 
