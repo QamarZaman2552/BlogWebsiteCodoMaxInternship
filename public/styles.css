@@ -187,6 +187,32 @@ main {
   transform: scale(0.98);
 }
 
+.form-group input.invalid,
+.form-group textarea.invalid {
+  border-color: #e74c3c;
+}
+
+.form-group input.valid,
+.form-group textarea.valid {
+  border-color: #27ae60;
+}
+
+.error-message {
+  display: block;
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-top: 0.4rem;
+}
+
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
 footer {
   background-color: #2c3e50;
   color: #bdc3c7;
