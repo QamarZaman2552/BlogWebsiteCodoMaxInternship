@@ -56,6 +56,43 @@ contentInput.addEventListener('input', () => {
   if (contentInput.classList.contains('invalid')) validateField(contentInput);
 });
 
+async function submitBlog(blog) {
+  const submitBtn = form.querySelector('.btn');
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = 'Submitting...';
+  submitBtn.disabled = true;
+
+  try {
+    const res = await fetch('/api/blogs', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(blog),
+    });
+
+    if (!res.ok) throw new Error('Failed to submit blog');
+
+    form.reset();
+    [titleInput, authorInput, contentInput].forEach((inp) => {
+      inp.classList.remove('valid');
+    });
+
+    const success = document.createElement('p');
+    success.className = 'success-message';
+    success.textContent = 'Blog submitted successfully!';
+    form.prepend(success);
+    setTimeout(() => success.remove(), 3000);
+  } catch (err) {
+    const error = document.createElement('p');
+    error.className = 'error-message';
+    error.textContent = 'Failed to submit blog. Please try again.';
+    form.prepend(error);
+    setTimeout(() => error.remove(), 3000);
+  } finally {
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+  }
+}
+
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const isTitleValid = validateField(titleInput);
@@ -69,21 +106,7 @@ form.addEventListener('submit', (e) => {
       content: contentInput.value.trim(),
     };
 
-    let existing = localStorage.getItem('blogs');
-    const blogs = existing ? JSON.parse(existing) : [];
-    blogs.push(blog);
-    localStorage.setItem('blogs', JSON.stringify(blogs));
-
-    form.reset();
-    [titleInput, authorInput, contentInput].forEach((inp) => {
-      inp.classList.remove('valid');
-    });
-
-    const success = document.createElement('p');
-    success.className = 'success-message';
-    success.textContent = 'Blog submitted successfully!';
-    form.prepend(success);
-    setTimeout(() => success.remove(), 3000);
+    submitBlog(blog);
   } else {
     const firstError = form.querySelector('.invalid');
     if (firstError) firstError.focus();
