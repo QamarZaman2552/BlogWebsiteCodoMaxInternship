@@ -1,4 +1,5 @@
 const blogGrid = document.getElementById('blogGrid');
+const blogCount = document.getElementById('blogCount');
 
 async function loadBlogs() {
   try {
@@ -6,13 +7,15 @@ async function loadBlogs() {
     const blogs = await res.json();
     renderBlogs(blogs);
   } catch (err) {
-    blogGrid.innerHTML = '<p>Failed to load blogs. Please try again later.</p>';
+    blogGrid.innerHTML = '<p class="empty-state">Failed to load blogs. Please try again later.</p>';
   }
 }
 
 function renderBlogs(blogs) {
+  blogCount.textContent = blogs.length;
+
   if (!blogs.length) {
-    blogGrid.innerHTML = '<p>No blogs yet. Add your first blog!</p>';
+    blogGrid.innerHTML = '<p class="empty-state">No blogs yet. Add your first blog!</p>';
     return;
   }
 
@@ -20,13 +23,26 @@ function renderBlogs(blogs) {
     .map(
       (blog) => `
         <article class="blog-card">
-          <h3>${blog.title}</h3>
-          <p>${blog.content}</p>
-          <small>By ${blog.author} on ${formatDate(blog.createdAt)}</small>
+          <h3>${escapeHtml(blog.title)}</h3>
+          <p class="blog-meta">By ${escapeHtml(blog.author)} on ${formatDate(blog.createdAt)}</p>
+          <p class="blog-content">${escapeHtml(blog.content)}</p>
+          <button class="read-more" data-expanded="false">Read more</button>
         </article>
       `
     )
     .join('');
+
+  blogGrid.querySelectorAll('.read-more').forEach((btn) => {
+    btn.addEventListener('click', () => toggleReadMore(btn));
+  });
+}
+
+function toggleReadMore(btn) {
+  const content = btn.previousElementSibling;
+  const expanded = btn.dataset.expanded === 'true';
+  content.classList.toggle('expanded', !expanded);
+  btn.dataset.expanded = String(!expanded);
+  btn.textContent = expanded ? 'Read more' : 'Show less';
 }
 
 function formatDate(dateString) {
@@ -36,6 +52,12 @@ function formatDate(dateString) {
     month: 'long',
     day: 'numeric',
   });
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
 }
 
 loadBlogs();
