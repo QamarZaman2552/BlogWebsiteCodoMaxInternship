@@ -49,4 +49,23 @@ router.post('/', (req, res) => {
   res.status(201).json(newBlog);
 });
 
+router.put('/:id', (req, res) => {
+  const blog = blogs.find((b) => b.id === parseInt(req.params.id, 10));
+  if (!blog) {
+    return res.status(404).json({ message: 'Blog not found' });
+  }
+
+  const { title, author, content } = req.body;
+
+  if (!title || !author || !content) {
+    return res.status(400).json({ message: 'Title, author, and content are required' });
+  }
+
+  blog.title = title;
+  blog.author = author;
+  blog.content = content;
+
+  res.json(blog);
+});
+
 module.exports = router;

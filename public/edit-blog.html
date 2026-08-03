@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Blog - Blog Management System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <div>
+      <a href="index.html">BlogSystem</a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="add-blog.html">Add Blog</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <h1 class="page-title">Edit Blog</h1>
+    <form class="blog-form" id="editForm">
+      <div class="form-group">
+        <label for="title">Blog Title</label>
+        <input type="text" id="title" name="title" required>
+      </div>
+      <div class="form-group">
+        <label for="author">Author</label>
+        <input type="text" id="author" name="author" required>
+      </div>
+      <div class="form-group">
+        <label for="content">Content</label>
+        <textarea id="content" name="content" rows="10" required></textarea>
+      </div>
+      <button type="submit" class="btn">Update Blog</button>
+      <a href="index.html" class="btn btn-secondary">Cancel</a>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Blog Management System. All rights reserved.</p>
+  </footer>
+  <script src="edit.js"></script>
+</body>
+</html>

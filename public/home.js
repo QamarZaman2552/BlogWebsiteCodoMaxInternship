@@ -26,7 +26,10 @@ function renderBlogs(blogs) {
           <h3>${escapeHtml(blog.title)}</h3>
           <p class="blog-meta">By ${escapeHtml(blog.author)} on ${formatDate(blog.createdAt)}</p>
           <p class="blog-content">${escapeHtml(blog.content)}</p>
-          <button class="read-more" data-expanded="false">Read more</button>
+          <div class="card-actions">
+            <button class="read-more" data-expanded="false">Read more</button>
+            <a class="btn btn-edit" href="edit-blog.html?id=${blog.id}">Edit</a>
+          </div>
         </article>
       `
     )
