@@ -28,7 +28,10 @@ function renderBlogs(blogs) {
           <p class="blog-content">${escapeHtml(blog.content)}</p>
           <div class="card-actions">
             <button class="read-more" data-expanded="false">Read more</button>
-            <a class="btn btn-edit" href="edit-blog.html?id=${blog.id}">Edit</a>
+            <div class="action-buttons">
+              <a class="btn btn-edit" href="edit-blog.html?id=${blog.id}">Edit</a>
+              <button class="btn btn-delete" data-id="${blog.id}" data-title="${escapeHtml(blog.title)}">Delete</button>
+            </div>
           </div>
         </article>
       `
@@ -38,14 +41,39 @@ function renderBlogs(blogs) {
   blogGrid.querySelectorAll('.read-more').forEach((btn) => {
     btn.addEventListener('click', () => toggleReadMore(btn));
   });
+
+  blogGrid.querySelectorAll('.btn-delete').forEach((btn) => {
+    btn.addEventListener('click', () => deleteBlog(btn));
+  });
 }
 
 function toggleReadMore(btn) {
-  const content = btn.previousElementSibling;
+  const content = btn.closest('.blog-card').querySelector('.blog-content');
   const expanded = btn.dataset.expanded === 'true';
   content.classList.toggle('expanded', !expanded);
   btn.dataset.expanded = String(!expanded);
   btn.textContent = expanded ? 'Read more' : 'Show less';
+}
+
+async function deleteBlog(btn) {
+  const id = btn.dataset.id;
+  const title = btn.dataset.title;
+  const confirmed = confirm(`Are you sure you want to delete "${title}"?`);
+
+  if (!confirmed) return;
+
+  btn.disabled = true;
+  btn.textContent = 'Deleting...';
+
+  try {
+    const res = await fetch(`/api/blogs/${id}`, { method: 'DELETE' });
+    if (!res.ok) throw new Error('Failed to delete blog');
+    loadBlogs();
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'Delete';
+    alert('Failed to delete blog. Please try again.');
+  }
 }
 
 function formatDate(dateString) {

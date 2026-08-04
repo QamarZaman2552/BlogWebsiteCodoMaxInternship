@@ -174,11 +174,26 @@ main {
   margin-top: 0.5rem;
 }
 
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
 .btn-edit {
   padding: 0.35rem 1.25rem;
   font-size: 0.9rem;
   text-decoration: none;
-  margin-left: auto;
+}
+
+.btn-delete {
+  padding: 0.35rem 1rem;
+  font-size: 0.9rem;
+  background-color: #e74c3c;
+}
+
+.btn-delete:hover {
+  background-color: #c0392b;
 }
 
 .btn-secondary {

@@ -68,4 +68,15 @@ router.put('/:id', (req, res) => {
   res.json(blog);
 });
 
+router.delete('/:id', (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  const index = blogs.findIndex((b) => b.id === id);
+  if (index === -1) {
+    return res.status(404).json({ message: 'Blog not found' });
+  }
+
+  const deleted = blogs.splice(index, 1)[0];
+  res.json({ message: 'Blog deleted successfully', deleted });
+});
+
 module.exports = router;
