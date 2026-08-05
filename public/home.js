@@ -3,8 +3,7 @@ const blogCount = document.getElementById('blogCount');
 
 async function loadBlogs() {
   try {
-    const res = await fetch('/api/blogs');
-    const blogs = await res.json();
+    const blogs = await api.getBlogs();
     renderBlogs(blogs);
   } catch (err) {
     blogGrid.innerHTML = '<p class="empty-state">Failed to load blogs. Please try again later.</p>';
@@ -29,6 +28,7 @@ function renderBlogs(blogs) {
           <div class="card-actions">
             <button class="read-more" data-expanded="false">Read more</button>
             <div class="action-buttons">
+              <a class="btn btn-view" href="view-blog.html?id=${blog.id}">View</a>
               <a class="btn btn-edit" href="edit-blog.html?id=${blog.id}">Edit</a>
               <button class="btn btn-delete" data-id="${blog.id}" data-title="${escapeHtml(blog.title)}">Delete</button>
             </div>
@@ -66,8 +66,7 @@ async function deleteBlog(btn) {
   btn.textContent = 'Deleting...';
 
   try {
-    const res = await fetch(`/api/blogs/${id}`, { method: 'DELETE' });
-    if (!res.ok) throw new Error('Failed to delete blog');
+    await api.deleteBlog(id);
     loadBlogs();
   } catch (err) {
     btn.disabled = false;

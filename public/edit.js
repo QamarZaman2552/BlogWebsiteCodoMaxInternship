@@ -12,9 +12,7 @@ if (!blogId) {
 
 async function loadBlog() {
   try {
-    const res = await fetch(`/api/blogs/${blogId}`);
-    if (!res.ok) throw new Error('Blog not found');
-    const blog = await res.json();
+    const blog = await api.getBlog(blogId);
     titleInput.value = blog.title;
     authorInput.value = blog.author;
     contentInput.value = blog.content;
@@ -42,13 +40,7 @@ form.addEventListener('submit', async (e) => {
   submitBtn.disabled = true;
 
   try {
-    const res = await fetch(`/api/blogs/${blogId}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updatedBlog),
-    });
-
-    if (!res.ok) throw new Error('Failed to update blog');
+    await api.updateBlog(blogId, updatedBlog);
 
     const success = document.createElement('p');
     success.className = 'success-message';

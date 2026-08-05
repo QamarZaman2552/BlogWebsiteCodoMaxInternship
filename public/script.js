@@ -63,13 +63,7 @@ async function submitBlog(blog) {
   submitBtn.disabled = true;
 
   try {
-    const res = await fetch('/api/blogs', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(blog),
-    });
-
-    if (!res.ok) throw new Error('Failed to submit blog');
+    await api.createBlog(blog);
 
     form.reset();
     [titleInput, authorInput, contentInput].forEach((inp) => {
