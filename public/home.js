@@ -6,8 +6,27 @@ async function loadBlogs() {
     const blogs = await api.getBlogs();
     renderBlogs(blogs);
   } catch (err) {
-    blogGrid.innerHTML = '<p class="empty-state">Failed to load blogs. Please try again later.</p>';
+    renderBlogs(getFallbackBlogs());
   }
+}
+
+function getFallbackBlogs() {
+  return [
+    {
+      id: 1,
+      title: 'Sample Blog Post',
+      author: 'Admin',
+      content: 'This is a sample blog post. When hosted on GitHub Pages (static hosting), the Express API is not available, so this sample data is shown. Run the app locally to use the full backend.',
+      createdAt: '2026-07-28T10:00:00',
+    },
+    {
+      id: 2,
+      title: 'Getting Started with Blogging',
+      author: 'Qamar',
+      content: 'Blogging is a great way to express your ideas and connect with readers. This demonstration shows how the frontend gracefully handles a missing backend.',
+      createdAt: '2026-07-27T09:30:00',
+    },
+  ];
 }
 
 function renderBlogs(blogs) {
