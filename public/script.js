@@ -57,7 +57,7 @@ contentInput.addEventListener('input', () => {
 });
 
 async function submitBlog(blog) {
-  const submitBtn = form.querySelector('.btn');
+  const submitBtn = form.querySelector('.btn-submit');
   const originalText = submitBtn.textContent;
   submitBtn.textContent = 'Submitting...';
   submitBtn.disabled = true;

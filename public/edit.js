@@ -34,7 +34,7 @@ form.addEventListener('submit', async (e) => {
     content: contentInput.value.trim(),
   };
 
-  const submitBtn = form.querySelector('.btn');
+  const submitBtn = form.querySelector('.btn-submit');
   const originalText = submitBtn.textContent;
   submitBtn.textContent = 'Updating...';
   submitBtn.disabled = true;
