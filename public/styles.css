@@ -370,7 +370,7 @@ main {
 }
 
 .form-group {
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 }
 
 .form-group label {
@@ -479,6 +479,13 @@ main {
 .form-group input.invalid,
 .form-group textarea.invalid {
   border-color: #e74c3c;
+  background: #fdecea;
+}
+
+.form-group input.invalid:focus,
+.form-group textarea.invalid:focus {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.12);
 }
 
 .form-group input.valid,
