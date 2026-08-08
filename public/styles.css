@@ -447,3 +447,108 @@ footer {
   padding: 1.5rem;
   margin-top: auto;
 }
+
+@media (max-width: 768px) {
+  main {
+    padding: 0 1rem;
+    margin: 1.5rem auto;
+  }
+
+  nav {
+    padding: 0.75rem 1rem;
+  }
+
+  nav ul {
+    gap: 1rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 1.9rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .blog-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .detail-title {
+    font-size: 1.6rem;
+  }
+
+  .blog-detail {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  nav > div {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  nav ul {
+    gap: 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .blog-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .action-buttons {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .action-buttons .btn {
+    flex: 1;
+    text-align: center;
+  }
+
+  .blog-form .btn {
+    width: 100%;
+  }
+
+  .detail-actions {
+    flex-direction: column;
+  }
+
+  .detail-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
